@@ -5,8 +5,6 @@ let cmd = inputArr[0];
 let helpobj = require("./commands/help");
 let treeobj = require("./commands/tree");
 let orgainerobj = require("./commands/organizer");
-
-
 switch(cmd){
     case  "help":
         helpobj.helpfxn();
