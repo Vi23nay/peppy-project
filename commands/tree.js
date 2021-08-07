@@ -5,12 +5,26 @@ function tree(srcpath){
         srcpath = process.cwd();
     }
     
-    let parentfolderName = path.basename(srcpath);
-    console.log("└──"+parentfolderName);
+    if(fs.existsSync(srcpath)  == true){
+        treeHelper(srcpath, "");
+    }else{
+        console.log("Please enter correct path");
+    }
+}
 
-    let content = fs.readdirSync(srcpath);
-    for(i=0 ; i < content.length ; i++){
-        console.log("\t"+"├──"+content[i]);
+function treeHelper(srcpath, indent){
+    isFile = fs.lstatSync(srcpath).isFile();
+    if(isFile){
+        let fileName = path.basename(srcpath);
+        console.log(indent + "├──"+fileName);
+    }else{//if directory
+        let dirName = path.basename(srcpath);
+        console.log(indent+"└──"+dirName);
+        let content = fs.readdirSync(srcpath);
+        for(let i = 0 ; i < content.length ; i++){
+            let childPath = path.join(srcpath, content[i]);
+            treeHelper(childPath,indent+"\t");
+        }
     }
 }
 

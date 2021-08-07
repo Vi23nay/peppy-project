@@ -1,0 +1,23 @@
+{
+  "name": "peppy_project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "peppymain.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vi23nay/peppy-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bin": {
+    "peppy": "peppymain.js"
+  },
+  "bugs": {
+    "url": "https://github.com/Vi23nay/peppy-project/issues"
+  },
+  "homepage": "https://github.com/Vi23nay/peppy-project#readme"
+}

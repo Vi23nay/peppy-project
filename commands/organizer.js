@@ -20,38 +20,40 @@ function organizer(srcpath){
     
     let allfiles = fs.readdirSync(srcpath);//array
     for(let file = 0 ; file < allfiles.length ; file++){
-        // let contentPath = path.join(srcpath+content[i]);
-        // let fileName = path.basename(content);
-        let extension = path.extname(allfiles[file]);
-        ;
-        // console.log(extension);
-        for(let folderName in types){
-            let fileInclude = false;
-            if(types[folderName].includes(extension)){
-                
-                let filesrcPath = path.join(srcpath,allfiles[file]);
-                let destPath = path.join(organizedFilePath,folderName);
-                if(fs.existsSync(destPath)){
-                    
-                }else{
-                    fs.mkdirSync(destPath);
+        let childAddress = path.join(srcpath, allfiles[file]);
 
+        if(fs.lstatSync(childAddress).isFile() == true){
+            let extension = path.extname(allfiles[file]);
+            let belongingFolder;
+            let validFile = false;
+
+            for(let folderName in types){
+                if(types[folderName].includes(extension)){
+                    validFile = true;
+                    belongingFolder = folderName;
+                    break;
                 }
-                destPath = path.join(organizedFilePath,folderName,allfiles[file]) 
-                fs.copyFileSync(filesrcPath,destPath);
-                
             }
             
+            if (validFile == false){
+                belongingFolder = "others";
+            }
+            let filesrcPath = path.join(srcpath,allfiles[file]);
+            let destPath = path.join(organizedFilePath,belongingFolder);
+            if(fs.existsSync(destPath)){
+                
+            }else{
+                fs.mkdirSync(destPath);
 
+            }
+            destPath = path.join(organizedFilePath,belongingFolder,allfiles[file]) 
+            console.log(allfiles[file] +"  ----belongs to ->> " + belongingFolder);
+            fs.copyFileSync(filesrcPath,destPath);
+
+                
         }
-        
-    }
-    console.log("files organized");
-
-
-
-
-}
+    }console.log("Files organised");
+        }
 
 module.exports={
     organizerfxn : organizer

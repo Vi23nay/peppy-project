@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+////////shebang syntax ko make this project globally
 let inputArr = process.argv.slice(2);
 let cmd = inputArr[0];
 // let srcpath = inputArr[1];
